@@ -1,0 +1,43 @@
+.newparent{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    margin: 10px;
+    margin-left: 25px;
+    width: 80%;
+}
+
+.newQuestionContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.askbox{
+    display: flex;
+    width: 80%;
+}
+
+.askContainer{
+    padding: 15px 15px;
+    border-radius: 3px;
+    border: solid gray 1px;
+    margin-bottom: 15px;
+}
+
+.askbox > .jumbo{
+    width: 100%;
+    padding: 1rem 1rem;
+}
+
+@media (min-width: 576px){
+    .jumbo {
+        padding: 0rem 0rem;
+    }
+}
+
+
+.askbutton{
+    display: flex;
+    width: fit-content;
+}

@@ -1,0 +1,1 @@
+export const SERVERIP = "http://localhost:3010/user"

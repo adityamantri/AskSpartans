@@ -1,0 +1,66 @@
+.headline{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
+
+.questionList{
+
+}
+
+.questionBox{
+    padding: 12px 8px;
+    box-sizing: border-box;
+    border-bottom: 1px solid lightgray;
+}
+
+.questionBox-left{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    margin-right: 0;
+    padding: 0 8px 0 0;
+    box-sizing: content-box;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.votes{
+    display: inline-block;
+    height: 38px;
+    min-width: 38px;
+    margin: 0 3px 0 0;
+    font-size: 11px;
+    color: #07c;
+    padding: 6px;
+    text-align: center;
+    box-sizing: inherit;
+}
+
+.count{
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.questionBox-right{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+.questionBox-right >h3{
+    margin-top: 0px;
+    font-size: small;
+}
+.questionBox-right >h3> .question-title{
+    font-size: 16px;
+    font-weight: 400;
+    color: #07c;
+}
+
+.tag-badge{
+    margin-left: 4px;
+}
+
