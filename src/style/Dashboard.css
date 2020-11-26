@@ -64,3 +64,33 @@
     margin-left: 4px;
 }
 
+
+.pagination {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    cursor: pointer;
+    margin-top: 25px;
+  }
+  
+  .pagination a {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #07c;
+    color: #07c;
+  }
+  
+  .pagination__link {
+    font-weight: bold;
+    color: #07c;
+  }
+  
+  .pagination__link--active a {
+    color: #fff;
+    background: #07c;
+  }
+  
+  .pagination__link--disabled a {
+    color: rgb(198, 197, 202);
+    border: 1px solid rgb(198, 197, 202);
+  }

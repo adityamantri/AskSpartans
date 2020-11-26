@@ -5,10 +5,11 @@ export default function MyNavbar() {
   return (
     <div className="navContainer">
       <Navbar bg="light" variant="light">
-        <Navbar.Brand href="#home">Ask Spartans</Navbar.Brand>
+        <Navbar.Brand href="/dashboard">Ask Spartans</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="#home">My Questions</Nav.Link>
           <Nav.Link href="#features">My Answers</Nav.Link>
+          <Nav.Link href="/dashboard">Dashboard</Nav.Link>
           <Nav.Link href="#pricing">My Account</Nav.Link>
         </Nav>
         <Form inline>

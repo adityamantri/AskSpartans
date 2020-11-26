@@ -8,7 +8,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Newquestion from "./components/Newquestion";
 import Dashboard from "./components/Dashboard";
-import Answers from "./components/Answers";
+import Question from "./components/Question";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path="/signUp" exact component={SignUp} />
         <Route path="/askQuestion" exact component={Newquestion} />
         <Route path="/dashboard" exact component={Dashboard} />
-        <Route path="/question" exact component={Answers}/>
+        <Route path="/question/:id" exact component={Question}/>
     </Router>
   );
 }
