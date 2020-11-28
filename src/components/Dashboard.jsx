@@ -5,7 +5,7 @@ import MyNavbar from "./MyNavbar";
 import "../style/Dashboard.css";
 import { SERVERIP } from "../config";
 import { useHistory } from "react-router-dom";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 
 export default function Dashboard() {
   let history = useHistory();
@@ -107,7 +107,7 @@ export default function Dashboard() {
               <div>answers</div>
             </div>
           </div>
-          <div className="questionBox-right">
+          <div className="questionBox-right w-100">
             <h3>
               <a href={"/question/" + item._id} className="question-title">
                 {" "}
@@ -123,6 +123,15 @@ export default function Dashboard() {
                   </Badge>
                 );
               })}
+            </div>
+            <div className="d-flex flex-row-reverse ">
+              <p className="border border-primary rounded p-2 text-primary font-italic bg-light">
+                Asked on: {item.postDate} <br />
+                Asked by:
+                {item.askedBy && item.askedBy.name
+                  ? " "+item.askedBy.name
+                  : null}{" "}
+              </p>{" "}
             </div>
           </div>
         </div>
@@ -192,7 +201,6 @@ export default function Dashboard() {
     </div>}
         {/* <div className="questionList">{questions}</div> */}
         <div className="questionList">
-          
           {currentPageData}
           <ReactPaginate
             previousLabel={"← Previous"}

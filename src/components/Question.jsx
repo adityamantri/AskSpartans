@@ -137,7 +137,8 @@ export default function Question(props) {
             questionData.answers.map((ans) => {
               // setvotes({...votes, [ans._id]: ans.upvote - ans.downvote})
               return (
-                <div className="d-flex answer">
+                  <div className="answer">
+                <div className="d-flex ">
                   <div className="ansVotes">
                     <Button
                       size="sm"
@@ -151,12 +152,26 @@ export default function Question(props) {
                     <Button size="sm" variant="secondary" onClick={() => handleDownvote(ans._id)}>
                       Down vote
                     </Button>
-                    <div className="ansText">
+                    <div className={questionData.askedBy === localStorage.getItem("id") ? "" : "d-none"} >
+                        <button className={ans.acceptStatus === "true" ? "bg-success" : ""} style={{marginTop:"2px"}}>accept</button>
+                        {/* {isAccepted} */}
                       {ans.acceptStatus === "true" ? "Accepted" : ""}
                     </div>
                   </div>
-                  <div>{ans.answer}</div>
+                  <div>{ans.answer}
+                  </div>
+                  
                 </div>
+                <div className="d-flex flex-row-reverse ">
+                <p className="border border-primary rounded p-2 text-primary font-italic bg-light">
+                  Answered on: {ans.time} <br />
+                  Answered by: 
+                  {(ans.answeredBy && ans.answeredBy.name)
+                    ? " "+ans.answeredBy.name
+                    : null}{" "}
+                </p>{" "}
+              </div>
+              </div>
               );
             })}
         </div>

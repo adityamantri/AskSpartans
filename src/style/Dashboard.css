@@ -17,10 +17,6 @@
     border-bottom: 1px solid gray;
 }
 
-.questionList{
-
-}
-
 .questionBox{
     padding: 12px 8px;
     box-sizing: border-box;
@@ -58,7 +54,7 @@
 .questionBox-right{
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
+    margin-left: 45px;
 }
 .questionBox-right >h3{
     margin-top: 0px;
@@ -73,6 +69,9 @@
 .tag-badge{
     margin-left: 4px;
 }
+h1 {
+    color: #07c;
+  }
 
 
 .pagination {
@@ -80,7 +79,7 @@
     justify-content: space-around;
     list-style: none;
     cursor: pointer;
-    margin-top: 25px;
+    margin-top: 50px;
   }
   
   .pagination a {
@@ -92,7 +91,7 @@
   
   .pagination__link {
     font-weight: bold;
-    color: #07c;
+    /* color: #07c; */
   }
   
   .pagination__link--active a {
