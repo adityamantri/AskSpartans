@@ -41,6 +41,7 @@ export default function Dashboard() {
     if(!isTag && !isText)
     {
       alert('Please specify search crieteria!')
+      return
     }
 
   let type = isTag?'tags':'text'
@@ -145,7 +146,16 @@ export default function Dashboard() {
   }
   return (
    load ? <div style={{display:"flex", flexDirection:'row', alignContent:'center' ,justifyContent:'center'}}>
-    <Spinner animation="grow" />
+     <Button variant="primary" disabled>
+    <Spinner
+      as="span"
+      animation="grow"
+      size="sm"
+      role="status"
+      aria-hidden="true"
+    />
+    Loading Questions...
+  </Button>
     </div> : <div>
       <MyNavbar />
       <div className="container">
