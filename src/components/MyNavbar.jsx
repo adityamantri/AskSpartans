@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
 
 export default function MyNavbar() {
+
+  const [isTag, setTag] = useState(false);
+  const [isText, setText] = useState(false);
   return (
     <div className="navContainer">
       <Navbar bg="light" variant="light">
@@ -12,10 +15,24 @@ export default function MyNavbar() {
           <Nav.Link href="/dashboard">Dashboard</Nav.Link>
           <Nav.Link href="#pricing">My Account</Nav.Link>
         </Nav>
-        <Form inline>
+        {/* <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+          <Form.Check
+          custom
+          inline
+          label="By Tag"
+          type='checkbox'
+          id = 'tags'
+      />
+      <Form.Check
+          custom
+          inline
+          label="By Text"
+          type='checkbox'
+          id = 'text'
+      />
           <Button variant="outline-primary">Search</Button>
-        </Form>
+        </Form> */}
       </Navbar>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Badge, Button } from "react-bootstrap";
+import { Badge, Button, Form, FormControl, Alert, Spinner } from "react-bootstrap";
 import MyNavbar from "./MyNavbar";
 import "../style/Dashboard.css";
 import { SERVERIP } from "../config";
@@ -12,8 +12,13 @@ export default function Dashboard() {
   const [questions, setquestions] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState([]);
+  const [isTag, setTag] = useState(false);
+  const [isText, setText] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [load, setLoad] = useState(false)
 
   useEffect(() => {
+    setLoad(true)
     axios.get(SERVERIP + "/loadQuestions").then((res) => {
       if (res.status === 200) {
         setData(res.data.questions);
@@ -24,9 +29,60 @@ export default function Dashboard() {
         console.log("failure in loading data");
       }
       console.log(res.status, res.data);
+      setLoad(false)
     });
     return () => {};
   }, []);
+
+  const onSearch=()=>{
+
+    console.log('Tag', isTag,'text', isText, 'Search Text', searchText)
+
+    if(!isTag && !isText)
+    {
+      alert('Please specify search crieteria!')
+    }
+
+  let type = isTag?'tags':'text'
+  let reqBody = {
+    type:type,
+    searchQuery : searchText
+  }  
+
+    setLoad(true)
+    axios.post(SERVERIP + "/search", reqBody).then((res) => {
+      if (res.status === 200) {
+        setData(res.data.questions);
+        // const listItems = res.data.questions;
+
+        // setquestions(listItems);
+      } else {
+        console.log("failure in loading data");
+      }
+      console.log(res.status, res.data);
+      setLoad(false)
+    });
+
+  }
+
+  const clearSearch = ()=>{
+    setSearchText('')
+    setTag(false)
+    setText(false)
+    setLoad(true)
+    axios.get(SERVERIP + "/loadQuestions").then((res) => {
+      if (res.status === 200) {
+        setData(res.data.questions);
+        // const listItems = res.data.questions;
+
+        // setquestions(listItems);
+      } else {
+        console.log("failure in loading data");
+      }
+      console.log(res.status, res.data);
+      setLoad(false)
+    });
+  }
 
   const PER_PAGE = 5;
   const offset = currentPage * PER_PAGE;
@@ -79,10 +135,46 @@ export default function Dashboard() {
     setCurrentPage(selectedPage);
   }
   return (
-    <div>
+   load ? <div style={{display:"flex", flexDirection:'row', alignContent:'center' ,justifyContent:'center'}}>
+    <Spinner animation="grow" />
+    </div> : <div>
       <MyNavbar />
       <div className="container">
-        <div className="headline">
+      <div className='searchContainer'>
+          <Form inline>
+          <FormControl type="text" placeholder="Search"  value={searchText}   onChange={(e) => {
+                      setSearchText(e.target.value);
+                    }} className="mr-sm-2" />
+          <Form.Check
+          custom
+          inline
+          label="By Tag"
+          type='checkbox'
+          id = 'tags'
+          checked={isTag}
+          onChange={()=>{
+            setTag(!isTag)
+            setText(false)
+          }}
+      />
+      <Form.Check
+          custom
+          inline
+          label="By Text"
+          type='checkbox'
+          id = 'text'
+          checked={isText}
+          onChange={()=>{
+            setText(!isText)
+            setTag(false)
+          }}
+      />
+          <Button variant="outline-primary" onClick={onSearch}>Search</Button>
+          <Button variant="primary" style={{marginLeft:'10px'}} disabled={searchText.length==0?true:false} onClick={clearSearch}>Clear Search</Button>
+        </Form>
+          </div>
+     { data.length!=0?<div className="headline">
+      
           <div>
             <h3>Top Questions</h3>
           </div>
@@ -91,7 +183,13 @@ export default function Dashboard() {
               Ask Question
             </Button>
           </div>
-        </div>
+        </div>:<div className="headline">
+      
+      <div>
+        <h3>No questions found!</h3>
+      </div>
+   
+    </div>}
         {/* <div className="questionList">{questions}</div> */}
         <div className="questionList">
           
