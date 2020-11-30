@@ -39,14 +39,18 @@ export default function Newquestion() {
     let req = {
       title: title,
       questionText: body,
-      askedBy: localStorage.getItem("id"),
+      askedBy: {name:localStorage.getItem('name'),id:localStorage.getItem('id')},
       tags: tags,
+
     };
     setLoginMessage(
       <Alert variant="info">Please wait while we post your question</Alert>
     );
+
+    console.log('HERE IN THE ASK QUESTIONS')
     axios.post(SERVERIP + "/ask", req).then((res) => {
       if (res.status === 200) {
+        console.log('HERE IN THE ASK QUESTIONS SUCCESS')
         setLoginMessage(
           <Alert variant="info">Successfully posted Question</Alert>
         );

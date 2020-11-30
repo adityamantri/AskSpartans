@@ -13,7 +13,7 @@ export default function Question(props) {
     axios
       .get(SERVERIP + "/loadQuestion/" + props.match.params.id)
       .then((res) => {
-        console.log(res.data.question);
+        console.log('Question Data is =---------->',res.data.question);
         setquestionData(res.data.question);
         // let temp = {};
         // res.data.question.answers.map((ans) => {
@@ -117,7 +117,7 @@ export default function Question(props) {
             </div>
             <div className="d-flex flex-row-reverse">
               <Button size="sm" disabled variant="outline-primary">
-                Asked by: {questionData.askedBy}
+                Asked by: {questionData.askedBy!=undefined?questionData.askedBy.name:''}
               </Button>
             </div>
           </div>

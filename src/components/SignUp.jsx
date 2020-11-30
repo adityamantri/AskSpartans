@@ -29,7 +29,17 @@ export default function SignUp() {
         }
       }).catch(err=> console.log(err))
     }
+
+    let redirectVar = null;
+
+    if (localStorage.getItem('id')) {
+      redirectVar = <Redirect to="/dashboard" />
+    }
+  
+
     return (
+      <div>
+        {redirectVar}
         <div>
             <div className="loginparent">
                 <img src={image}/>
@@ -65,6 +75,7 @@ export default function SignUp() {
           Already have an account <a href="/login">Sign in</a>
         </Form.Text>
     </div>
+        </div>
         </div>
     )
 }

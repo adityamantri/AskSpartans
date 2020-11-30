@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { SERVERIP } from "../config";
 import { image } from "../logo";
+import { Redirect } from 'react-router';
 import axios from 'axios';
 
 import "../style/Login.css";
@@ -23,13 +24,24 @@ export default function Login() {
       if(res.status === 200) {
         console.log(res.data);
         localStorage.setItem("id", res.data.id)
+        localStorage.setItem("name", res.data.name)
+        localStorage.setItem("email", res.data.email)
         history.push('/dashboard')
       }else{
         console.log(res.status);
       }
     }).catch(err=> console.log(err));
   }
+
+  let redirectVar = null;
+
+  if (localStorage.getItem('id')) {
+    redirectVar = <Redirect to="/dashboard" />
+  }
+
   return (
+    <div>
+      {redirectVar}
     <div className="loginparent">
       <img src={image} alt="SJSU"/>
       <div className="loginContainer">
@@ -61,6 +73,7 @@ export default function Login() {
       <Form.Text className="text-muted">
         Does not have an account <a href="/signUp">Signup</a>
       </Form.Text>
+    </div>
     </div>
   );
 }
