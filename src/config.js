@@ -1,1 +1,1 @@
-export const SERVERIP = "http://localhost:3010/user"
+export const SERVERIP = "http://18.225.36.23:3010/user"
