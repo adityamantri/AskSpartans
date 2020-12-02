@@ -32,7 +32,7 @@ export default function SignUp() {
               <Alert.Link
                 style={{ cursor: "pointer" }}
                 href="/login"
-                target="_blank"
+               
               >
                 {" "}
                 Login
