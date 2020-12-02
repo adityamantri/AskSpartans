@@ -4,6 +4,8 @@ import "../style/Question.css";
 import axios from "axios";
 import { Badge, Button, Form, Jumbotron, Alert } from "react-bootstrap";
 import { SERVERIP } from "../config";
+import accept from '../assets/images/accept.png'
+import greyaccept from '../assets/images/greyaccept.png'
 
 export default function Question(props) {
   const [questionData, setquestionData] = useState({});
@@ -193,9 +195,12 @@ function acceptAnswer(id){
                       Down vote
                     </Button>
                     <div className={questionData.askedBy.id === localStorage.getItem("id") ? "" : "d-none"} >
-                        <button className={ans.acceptStatus === "true" ? "bg-success" : ""} style={{marginTop:"2px"}} onClick={()=>acceptAnswer(ans._id)}>Accept</button>
+                        {/* <button className={ans.acceptStatus === "true" ? "bg-success" : ""} style={{marginTop:"2px"}} onClick={()=>acceptAnswer(ans._id)}>Accept</button> */}
                         {/* {isAccepted} */}
-                      {ans.acceptStatus === "true" ? "Accepted" : ""}
+                      {/* {ans.acceptStatus === "true" ? "Accepted" : ""} */}
+                     {ans.acceptStatus==='true' ? <img style={{marginTop:"2px"}} src={accept} height='40px' width='40px'></img>
+                    :(questionData.acceptStatus=='false' ? <img style={{marginTop:"2px"}} src={greyaccept} onClick={()=>acceptAnswer(ans._id)} height='40px' width='40px'></img> : null)
+                    }
                     </div>
                   </div>
                   <div>{ans.answer}
