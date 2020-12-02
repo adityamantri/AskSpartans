@@ -44,7 +44,7 @@ export default function Dashboard() {
       return
     }
 
-  let type = isTag?'tags':'text'
+  let type = isTag?'tag':'text'
   let reqBody = {
     type:type,
     searchQuery : searchText
