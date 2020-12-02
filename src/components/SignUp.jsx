@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import "../style/Login.css";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button,Alert } from "react-bootstrap";
 import { SERVERIP } from '../config';
 import {Redirect, useHistory} from 'react-router-dom';
 import axios from 'axios';
@@ -11,6 +11,7 @@ export default function SignUp() {
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
+    const [loginMessage, setLoginMessage] = useState(<></>);
     function handleSubmit(e) {
       e.preventDefault();
       let req = {
@@ -25,6 +26,21 @@ export default function SignUp() {
 
           history.push('/login')
         }else{
+          setLoginMessage(
+            <Alert variant="info">
+              Sign Up Successful{" "}
+              <Alert.Link
+                style={{ cursor: "pointer" }}
+                href="/login"
+                target="_blank"
+              >
+                {" "}
+                Login
+              </Alert.Link>{" "}
+              to Continue
+            </Alert>
+          );
+          return;
           console.log(res.status);
         }
       }).catch(err=> console.log(err))
@@ -45,6 +61,7 @@ export default function SignUp() {
                 <img src={image}/>
 
       <div className="loginContainer">
+      {loginMessage}
       <h1>Welcome to Ask Spartans</h1>
         <Form onSubmit={handleSubmit}>
             
