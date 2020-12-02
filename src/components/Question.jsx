@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import MyNavbar from "./MyNavbar";
 import "../style/Question.css";
 import axios from "axios";
-import { Badge, Button, Form, Jumbotron } from "react-bootstrap";
+import { Badge, Button, Form, Jumbotron, Alert } from "react-bootstrap";
 import { SERVERIP } from "../config";
 
 export default function Question(props) {
   const [questionData, setquestionData] = useState({});
   const [newAnswer, setnewAnswer] = useState("");
+  const [loginMessage, setLoginMessage] = useState(<></>);
 //   const [votes, setvotes] = useState({});
   useEffect(() => {
     axios
@@ -29,6 +30,23 @@ export default function Question(props) {
 //     console.log(votes);
 //     return () => {};
 //   }, [votes]);
+
+function acceptAnswer(id){
+  console.log('In accept answer!!')
+  axios
+  .put(SERVERIP + "/acceptAnswer", {
+    questionID: props.match.params.id,
+    answerID: id,
+  })
+  .then((res) => {
+    if (res.status === 200) {
+        console.log(res.data);
+        window.location.reload();
+        //setquestionData(res.data.question)
+    //   setvotes(votes => ({ ...votes, id: votes.id + 1 }));
+    }
+  }).catch(err => console.log(err));
+}
 
   function handleUpvote(id) {
     axios
@@ -62,6 +80,25 @@ export default function Question(props) {
   }
 
   function handleSubmit(e) {
+    e.preventDefault();
+    if (!localStorage.getItem("id")) {
+      console.log('Test not logged in')
+      setLoginMessage(
+        <Alert variant="danger">
+          Please{" "}
+          <Alert.Link
+            style={{ cursor: "pointer" }}
+            href="/login"
+            target="_blank"
+          >
+            {" "}
+            Login
+          </Alert.Link>{" "}
+          to Continue
+        </Alert>
+      );
+      return;
+    }
     axios
       .post(SERVERIP + "/answerQuestion", {
         questionID: props.match.params.id,
@@ -73,6 +110,7 @@ export default function Question(props) {
       })
       .then((res) => {
         console.log("answer post response", res.data);
+        window.location.reload()
       });
   }
 
@@ -145,15 +183,17 @@ export default function Question(props) {
                       variant="secondary"
                       block
                       onClick={() => handleUpvote(ans._id)}
+                      disabled={!localStorage.getItem("id")}
                     >
                       Up vote
                     </Button>
                     <div style={{ padding: "3px" }}>{ans.upvote - ans.downvote} Votes</div>
-                    <Button size="sm" variant="secondary" onClick={() => handleDownvote(ans._id)}>
+                    <Button size="sm" variant="secondary" onClick={() => handleDownvote(ans._id)} 
+                    disabled={!localStorage.getItem("id")} >
                       Down vote
                     </Button>
-                    <div className={questionData.askedBy === localStorage.getItem("id") ? "" : "d-none"} >
-                        <button className={ans.acceptStatus === "true" ? "bg-success" : ""} style={{marginTop:"2px"}}>accept</button>
+                    <div className={questionData.askedBy.id === localStorage.getItem("id") ? "" : "d-none"} >
+                        <button className={ans.acceptStatus === "true" ? "bg-success" : ""} style={{marginTop:"2px"}} onClick={()=>acceptAnswer(ans._id)}>Accept</button>
                         {/* {isAccepted} */}
                       {ans.acceptStatus === "true" ? "Accepted" : ""}
                     </div>
@@ -176,6 +216,7 @@ export default function Question(props) {
             })}
         </div>
         <div className="answerbox">
+        {loginMessage}
           <h5 style={{ paddingBottom: "15px" }}>Your Answer</h5>
           <Form onSubmit={handleSubmit}>
             <Form.Control

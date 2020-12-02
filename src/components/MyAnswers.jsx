@@ -6,7 +6,7 @@ import "../style/Dashboard.css";
 import { SERVERIP } from "../config";
 import { useHistory } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-
+import { Redirect } from 'react-router';
 export default function MyAnswers() {
   let history = useHistory();
   const [questions, setquestions] = useState(null);
@@ -145,8 +145,17 @@ export default function MyAnswers() {
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);
   }
+
+  let redirectVar = null;
+
+  if (localStorage.getItem('id')==undefined) {
+    redirectVar = <Redirect to="/login" />
+  }
+
   return (
-   load ? <div style={{display:"flex", flexDirection:'row', alignContent:'center' ,justifyContent:'center'}}>
+   <div>
+      {redirectVar}
+   {load ? <div style={{display:"flex", flexDirection:'row', alignContent:'center' ,justifyContent:'center'}}>
      <Button variant="primary" disabled>
     <Spinner
       as="span"
@@ -194,5 +203,7 @@ export default function MyAnswers() {
         </div>
       </div>
     </div>
+}
+    </div> 
   );
 }

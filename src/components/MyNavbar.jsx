@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
+import { useHistory } from 'react-router-dom';
+
 
 export default function MyNavbar() {
-
+  const history = useHistory();
   const [myQuestions, setMyQuestions] = useState(false);
   const [myAnswers, setMyAnswers] = useState(false);
   const [dashboard, setDashBoard] = useState(true);
@@ -22,7 +24,9 @@ export default function MyNavbar() {
         <Button variant="outline-primary">Search</Button>
         
       </Form> */}
-      <Button variant="primary" style={{marginLeft:"8px"}} onClick={()=>localStorage.clear()}>Logout</Button>
+      {localStorage.getItem('id')!=undefined?<Button variant="primary" style={{marginLeft:"8px"}} onClick={()=>localStorage.clear()}>Logout</Button>:
+      <Button variant="primary" style={{marginLeft:"8px"}} onClick={()=> history.push("/login")}>Login</Button>
+      }
     </Navbar>
   </div>
   );
