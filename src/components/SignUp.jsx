@@ -29,6 +29,7 @@ export default function SignUp() {
           setLoginMessage(
             <Alert variant="info">
               Sign Up Successful{" "}
+              Please
               <Alert.Link
                 style={{ cursor: "pointer" }}
                 href="/login"
@@ -37,7 +38,7 @@ export default function SignUp() {
                 {" "}
                 Login
               </Alert.Link>{" "}
-              to Continue
+              using your credentials
             </Alert>
           );
           return;

@@ -1,13 +1,22 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
 import { useHistory } from 'react-router-dom';
 
 
 export default function MyNavbar() {
   const history = useHistory();
-  const [myQuestions, setMyQuestions] = useState(false);
-  const [myAnswers, setMyAnswers] = useState(false);
-  const [dashboard, setDashBoard] = useState(true);
+  const [loginStatus, setLoginStatus] = useState(false);
+
+
+  useEffect(() => {
+  if(localStorage.getItem('id')==undefined)
+  {
+    setLoginStatus(false)
+  }
+    return () => {};
+  }, []);
+
   return (
     <div className="navContainer">
       
@@ -24,7 +33,8 @@ export default function MyNavbar() {
         <Button variant="outline-primary">Search</Button>
         
       </Form> */}
-      {localStorage.getItem('id')!=undefined?<Button variant="primary" style={{marginLeft:"8px"}} onClick={()=>localStorage.clear()}>Logout</Button>:
+      {localStorage.getItem('id')!=undefined?<Button variant="primary" style={{marginLeft:"8px"}} onClick={()=>{localStorage.clear()
+      setLoginStatus(!loginStatus)}}>Logout</Button>:
       <Button variant="primary" style={{marginLeft:"8px"}} onClick={()=> history.push("/login")}>Login</Button>
       }
     </Navbar>

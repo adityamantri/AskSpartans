@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button,Alert,Spinner } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { SERVERIP } from "../config";
 import { image } from "../logo";
@@ -12,9 +12,11 @@ export default function Login() {
   let history = useHistory();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-
+  const [loginMessage, setLoginMessage] = useState(<></>);
+  const [load, setLoad] = useState(false)
   function handleLogin(e) {
     e.preventDefault();
+    setLoad(true)
     let req = {
       email: email,
       password: password
@@ -28,9 +30,14 @@ export default function Login() {
         localStorage.setItem("email", res.data.email)
         history.push('/dashboard')
       }else{
-        console.log(res.status);
+        setLoginMessage(<Alert variant="danger">
+              Invalid username / password
+            </Alert>)
+          
+        console.log('Not logged in ', res.status);
       }
     }).catch(err=> console.log(err));
+    setLoad(false)
   }
 
   let redirectVar = null;
@@ -38,6 +45,7 @@ export default function Login() {
   if (localStorage.getItem('id')) {
     redirectVar = <Redirect to="/dashboard" />
   }
+  console.log('Load value', load)
 
   return (
     <div>
@@ -45,6 +53,7 @@ export default function Login() {
     <div className="loginparent">
       <img src={image} alt="SJSU"/>
       <div className="loginContainer">
+      {loginMessage}
         <h1>Welcome to Ask Spartans</h1>
         <Form onSubmit={handleLogin}>
           <Form.Group controlId="formBasicEmail">
@@ -64,8 +73,8 @@ export default function Login() {
           </Form.Group>
           <Form.Group controlId="formBasicCheckbox"></Form.Group>
           <div className="spartanButton">
-            <Button variant="warning" type="submit">
-              Submit
+          <Button variant="warning" type="submit">
+              {!load ? 'Log In' : 'Logging In, please wait!'}
             </Button>
           </div>
         </Form>
