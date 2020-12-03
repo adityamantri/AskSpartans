@@ -198,7 +198,7 @@ function acceptAnswer(id){
                       Up vote
                     </Button>}
                     <div style={{ padding: "3px" }}>{ans.upvote - ans.downvote} Votes</div>
-                   {ans.downids.includes(localstorage.getItem('id')) ? <Button size="sm" variant="secondary" onClick={() => handleDownvote(ans._id)} 
+                   {!ans.downids.includes(localStorage.getItem('id')) ? <Button size="sm" variant="secondary" onClick={() => handleDownvote(ans._id)} 
                     disabled={!localStorage.getItem("id")} >
                       Down vote
                     </Button> : 
