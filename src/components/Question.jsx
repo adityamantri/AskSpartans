@@ -182,7 +182,7 @@ function acceptAnswer(id){
                   <div className="ansVotes">
                     <Button
                       size="sm"
-                      variant="secondary"
+                      variant="success"
                       block
                       onClick={() => handleUpvote(ans._id)}
                       disabled={!localStorage.getItem("id")}
@@ -190,7 +190,7 @@ function acceptAnswer(id){
                       Up vote
                     </Button>
                     <div style={{ padding: "3px" }}>{ans.upvote - ans.downvote} Votes</div>
-                    <Button size="sm" variant="secondary" onClick={() => handleDownvote(ans._id)} 
+                    <Button size="sm" variant="danger" onClick={() => handleDownvote(ans._id)} 
                     disabled={!localStorage.getItem("id")} >
                       Down vote
                     </Button>
