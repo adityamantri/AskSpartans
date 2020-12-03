@@ -85,6 +85,15 @@ export default function Dashboard() {
     });
   }
 
+
+  const getVotes = (item)=>{
+    let votes = 0;
+    for(let i=0; i<item.answers.length;i++)
+    {
+      votes += (item.answers[i].upvote - item.answers[i].downvote)
+    }
+    return votes
+  }
   const PER_PAGE = 5;
   const offset = currentPage * PER_PAGE;
   const currentPageData = data.slice(offset, offset + PER_PAGE).map((item) => {
@@ -97,7 +106,7 @@ export default function Dashboard() {
           >
             <div className="votes">
               <div className="count">
-                <span>{item.votes ? item.votes : 0}</span>
+                <span>{getVotes(item)}</span>
               </div>
               <div>votes</div>
             </div>
