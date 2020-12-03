@@ -180,7 +180,15 @@ function acceptAnswer(id){
                   <div className="answer">
                 <div className="d-flex ">
                   <div className="ansVotes">
-                    <Button
+                   {!ans.upids.includes(localStorage.getItem('id'))? <Button
+                      size="sm"
+                      variant="secondary"
+                      block
+                      onClick={() => handleUpvote(ans._id)}
+                      disabled={!localStorage.getItem("id")}
+                    >
+                      Up vote
+                    </Button> : <Button
                       size="sm"
                       variant="success"
                       block
@@ -188,12 +196,16 @@ function acceptAnswer(id){
                       disabled={!localStorage.getItem("id")}
                     >
                       Up vote
-                    </Button>
+                    </Button>}
                     <div style={{ padding: "3px" }}>{ans.upvote - ans.downvote} Votes</div>
+                   {ans.downids.includes(localstorage.getItem('id')) ? <Button size="sm" variant="secondary" onClick={() => handleDownvote(ans._id)} 
+                    disabled={!localStorage.getItem("id")} >
+                      Down vote
+                    </Button> : 
                     <Button size="sm" variant="danger" onClick={() => handleDownvote(ans._id)} 
                     disabled={!localStorage.getItem("id")} >
                       Down vote
-                    </Button>
+                    </Button>}
                     <div className={questionData.askedBy.id === localStorage.getItem("id") ? "" : "d-none"} >
                         {/* <button className={ans.acceptStatus === "true" ? "bg-success" : ""} style={{marginTop:"2px"}} onClick={()=>acceptAnswer(ans._id)}>Accept</button> */}
                         {/* {isAccepted} */}
