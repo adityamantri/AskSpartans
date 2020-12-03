@@ -13,6 +13,13 @@
     width: 100%;
 }
 
+.newDashboardContainer{
+    display: flex;
+    flex-direction: column;
+   
+
+}
+
 .askbox{
     display: flex;
     width: 80%;

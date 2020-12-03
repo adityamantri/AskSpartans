@@ -26,7 +26,8 @@ export default function MyNavbar() {
           <Nav.Link href="/myQuestions">My Questions</Nav.Link>
           <Nav.Link href="/myAnswers">My Answers</Nav.Link>
           <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-          <Button variant="primary" onClick={handleShow}>
+          <Nav.Link href="/analytics">Analytics</Nav.Link>
+          <Button variant="primary"  size="sm" onClick={handleShow}>
             ChatBot
           </Button>
           <Modal show={show} onHide={handleClose}>

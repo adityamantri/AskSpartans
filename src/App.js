@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard";
 import Question from "./components/Question";
 import MyQuestions from "./components/MyQuestions";
 import MyAnswers from "./components/MyAnswers";
+import Analytics from "./components/Analytics";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/myAnswers" exact component={MyAnswers} />
         <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/question/:id" exact component={Question}/>
+        <Route path="/analytics" exact component={Analytics}/>
     </Router>
   );
 }
