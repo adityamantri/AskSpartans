@@ -73,7 +73,7 @@ export default function Login() {
           </Form.Group>
           <Form.Group controlId="formBasicCheckbox"></Form.Group>
           <div className="spartanButton">
-          <Button variant="warning" type="submit">
+          <Button variant="warning" type="submit" id='submt'>
               {!load ? 'Log In' : 'Logging In, please wait!'}
             </Button>
           </div>
